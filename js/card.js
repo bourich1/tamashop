@@ -218,7 +218,7 @@ document.getElementById('checkoutForm').addEventListener('submit', function(even
             localStorage.removeItem('cart');
             
             // إعادة التوجيه إلى الصفحة الرئيسية
-            window.location.href = '/'; // أو ضع رابط الصفحة الرئيسية الخاصة بك
+            window.location.href = '../index.html'; // أو ضع رابط الصفحة الرئيسية الخاصة بك
         });
     }, function(error) {
         // عرض SweetAlert عند الفشل
