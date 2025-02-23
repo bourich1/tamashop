@@ -4,7 +4,8 @@ const spaceId = 'r3bner2cqrh8';
 const accessToken = 'o5u_OoaEVt3BfjO7f6ohokvbzWqTV7z53G-wbRJaq2U';
 const environment = 'master';
 
-const url = `https://cdn.contentful.com/spaces/${spaceId}/environments/${environment}/entries?access_token=${accessToken}`;
+// get api prudact
+const url = `https://cdn.contentful.com/spaces/${spaceId}/environments/${environment}/entries?access_token=${accessToken}&content_type=prudacts`;
 
 fetch(url)
     .then(response => response.json())
@@ -89,3 +90,30 @@ fetch(url)
     
         updateCartCount();
     });    
+
+
+// get prudact header
+fetch(`https://cdn.contentful.com/spaces/${spaceId}/environments/${environment}/entries?access_token=${accessToken}&content_type=header`)
+    .then(response => response.json())
+    .then(data => {
+        const header = document.querySelector("header");
+        const title = document.querySelector("header h1");
+        const subtitle = document.querySelector("header p");
+
+        if (data.items.length > 0) {
+            const content = data.items[0].fields;
+            title.textContent = content.title;
+            subtitle.textContent = content.descheader;
+
+            // جلب رابط الصورة الخلفية
+            const imageAsset = data.includes.Asset.find(asset => asset.sys.id === content.imgheader.sys.id);
+            const imageUrl = `https:${imageAsset.fields.file.url}`;
+
+            // تحديث خلفية الهيدر
+            header.style.backgroundImage = `url(${imageUrl})`;
+            header.style.backgroundSize = "cover";
+            header.style.backgroundPosition = "center";
+            header.style.backgroundRepeat = "no-repeat";
+        }
+    })
+    .catch(error => console.error("Error fetching data:", error));
