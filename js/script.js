@@ -97,13 +97,10 @@ fetch(`https://cdn.contentful.com/spaces/${spaceId}/environments/${environment}/
     .then(response => response.json())
     .then(data => {
         const header = document.querySelector("header");
-        const title = document.querySelector("header h1");
-        const subtitle = document.querySelector("header p");
+
 
         if (data.items.length > 0) {
             const content = data.items[0].fields;
-            title.textContent = content.title;
-            subtitle.textContent = content.descheader;
 
             // جلب رابط الصورة الخلفية
             const imageAsset = data.includes.Asset.find(asset => asset.sys.id === content.imgheader.sys.id);
@@ -117,3 +114,5 @@ fetch(`https://cdn.contentful.com/spaces/${spaceId}/environments/${environment}/
         }
     })
     .catch(error => console.error("Error fetching data:", error));
+
+
