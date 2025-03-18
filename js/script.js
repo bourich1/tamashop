@@ -52,7 +52,7 @@ fetch(url)
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent text-center">
                             <a class="btn btn-outline-dark mt-auto addToCartBtn" 
    href="product-detils.html?name=${encodeURIComponent(productName)}&image=${encodeURIComponent(productImage)}&price=${productPrice}&oldPrice=${oldPrice}&evaluation=${evaluation}&description=${productDescription}&category=${category}">
-   Add to cart
+   Product view
 </a>
 
                         </div>
@@ -116,3 +116,14 @@ fetch(`https://cdn.contentful.com/spaces/${spaceId}/environments/${environment}/
     .catch(error => console.error("Error fetching data:", error));
 
 
+
+// add active link to navbar
+    const navLinks = document.querySelectorAll(".nav-link");
+    navLinks.forEach(ele => {
+        ele.addEventListener("click" , ()=>{
+           navLinks.forEach( e =>{
+            e.classList.remove("active");
+           })
+            ele.classList.add("active");
+        })
+    });
