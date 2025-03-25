@@ -10909,3 +10909,16 @@ textarea.form-control-lg {
 
 
 
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0; /* Keeps it behind the text */
+}
+
+.container {
+    position: relative;
+    z-index: 1; /* Ensures text stays above the particles */
+}

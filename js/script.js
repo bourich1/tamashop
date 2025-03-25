@@ -52,7 +52,7 @@ fetch(url)
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent text-center">
                             <a class="btn btn-outline-dark mt-auto addToCartBtn" 
    href="product-detils.html?name=${encodeURIComponent(productName)}&image=${encodeURIComponent(productImage)}&price=${productPrice}&oldPrice=${oldPrice}&evaluation=${evaluation}&description=${productDescription}&category=${category}">
-   Product view
+   شراء المنتج
 </a>
 
                         </div>
@@ -92,38 +92,28 @@ fetch(url)
     });    
 
 
-// get prudact header
-fetch(`https://cdn.contentful.com/spaces/${spaceId}/environments/${environment}/entries?access_token=${accessToken}&content_type=header`)
-    .then(response => response.json())
-    .then(data => {
-        const header = document.querySelector("header");
+//  get prudact header
+// fetch(`https://cdn.contentful.com/spaces/${spaceId}/environments/${environment}/entries?access_token=${accessToken}&content_type=header`)
+//     .then(response => response.json())
+//     .then(data => {
+//         const header = document.querySelector("header");
 
 
-        if (data.items.length > 0) {
-            const content = data.items[0].fields;
+//         if (data.items.length > 0) {
+//             const content = data.items[0].fields;
 
-            // جلب رابط الصورة الخلفية
-            const imageAsset = data.includes.Asset.find(asset => asset.sys.id === content.imgheader.sys.id);
-            const imageUrl = `https:${imageAsset.fields.file.url}`;
+//             // جلب رابط الصورة الخلفية
+//             const imageAsset = data.includes.Asset.find(asset => asset.sys.id === content.imgheader.sys.id);
+//             const imageUrl = `https:${imageAsset.fields.file.url}`;
 
-            // تحديث خلفية الهيدر
-            header.style.backgroundImage = `url(${imageUrl})`;
-            header.style.backgroundSize = "cover";
-            header.style.backgroundPosition = "center";
-            header.style.backgroundRepeat = "no-repeat";
-        }
-    })
-    .catch(error => console.error("Error fetching data:", error));
+//             // تحديث خلفية الهيدر
+//             header.style.backgroundImage = `url(${imageUrl})`;
+//             header.style.backgroundSize = "cover";
+//             header.style.backgroundPosition = "center";
+//             header.style.backgroundRepeat = "no-repeat";
+//         }
+//     })
+//     .catch(error => console.error("Error fetching data:", error));
 
 
 
-// add active link to navbar
-    const navLinks = document.querySelectorAll(".nav-link");
-    navLinks.forEach(ele => {
-        ele.addEventListener("click" , ()=>{
-           navLinks.forEach( e =>{
-            e.classList.remove("active");
-           })
-            ele.classList.add("active");
-        })
-    });

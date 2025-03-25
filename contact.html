@@ -171,25 +171,25 @@
     <div class="container contact-container">
         <!-- Form Section -->
         <div class="contact-form">
-            <h1 class="text-primary">Contact Us</h1>
-            <form id="contactForm">
+            <h1 class="text-primary text-center">تواصل معانا</h1>
+            <form id="contactForm" >
                 <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
+                    <label for="name" class="form-label text-end">الإسم</label>
                     <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
                     <div class="error" id="nameError">Name is required and must be at least 3 characters.</div>
                 </div>
                 <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
+                    <label for="email" class="form-label text-end">البريد الالكتروني</label>
                     <input type="email" class="form-control" id="email" placeholder="example@email.com" required>
                     <div class="error" id="emailError">Please enter a valid email address.</div>
                 </div>
                 <div class="mb-3">
-                    <label for="message" class="form-label">Message</label>
+                    <label for="message" class="form-label text-end">الرسالة</label>
                     <textarea class="form-control" id="message" rows="4" placeholder="Write your message here" required></textarea>
                     <div class="error" id="messageError">Message is required and must be at least 10 characters.</div>
                 </div>
                 <button type="submit" class="btn contact-btn w-100">
-                    Send Message
+                    إرسال الرسالة
                 </button>
             </form>
         </div>
@@ -199,6 +199,75 @@
             <img src="img/sapiens.svg" alt="Sapiens SVG" class="svg-icon">
         </div>
     </div>
+
+    <!-- footer -->
+    <footer
+    class="text-dark py-5 text-start"
+    style="background-color: rgb(245, 243, 243)"
+  >
+    <div class="container">
+      <div class="row">
+        <!-- Logo and Description Section -->
+        <div class="col-md-4 text-center text-md-start">
+          <img
+            src="img/logo tamashop.png"
+            alt="Logo"
+            width="120"
+            class="mb-3"
+          />
+          <p>
+            Tamashop is your go-to online store for high-quality products at
+            unbeatable prices. 🛍️ Enjoy fast delivery, secure payments, and
+            top-notch customer service. 🚀 Shop now and experience hassle-free
+            shopping! 🌐
+          </p>
+        </div>
+
+        <!-- Quick Links Section -->
+        <div class="col-md-4">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled text-start">
+            <li>
+              <a href="index.html" class="text-dark text-decoration-none"
+                >Home</a
+              >
+            </li>
+            <li>
+              <a href="products.html" class="text-dark text-decoration-none"
+                >Products</a
+              >
+            </li>
+            <li>
+              <a href="contact.html" class="text-dark text-decoration-none"
+                >Contact Us</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- Social Media Section -->
+        <div class="col-md-4">
+          <h5>Follow Us</h5>
+          <a href="https://www.facebook.com/share/1DihqjSw2U/?mibextid=wwXIfr" class="text-dark me-3"
+            ><i class="fab fa-facebook fs-3"></i
+          ></a>
+          <a href="#" class="text-dark me-3"
+            ><i class="fab fa-whatsapp fs-3"></i
+          ></a>
+          <a
+            href="https://www.instagram.com/tamashop_eco/"
+            class="text-dark me-3"
+            ><i class="fab fa-instagram fs-3"></i
+          ></a>
+        </div>
+      </div>
+
+      <!-- Copyright -->
+      <div class="text-center mt-4">
+        <p class="mb-0">&copy; 2025 All Rights Reserved - Tamashop</p>
+      </div>
+    </div>
+  </footer>
 
     <script>
         document.getElementById("contactForm").addEventListener("submit", function(event) {

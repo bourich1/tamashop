@@ -135,8 +135,8 @@ document.getElementById('checkoutForm').addEventListener('submit', function(even
             <tr>
                 <td><img src="${product.image}" alt="${product.name}" width="50"> ${product.name}</td>
                 <td>${product.quantity}</td>
-                <td>$${product.price}</td>
-                <td>$${productTotal.toFixed(2)}</td>
+                <td>${product.price} DH</td>
+                <td>${productTotal.toFixed(2)} DH</td>
             </tr>
         `;
         totalAmount += productTotal;
@@ -192,7 +192,7 @@ document.getElementById('checkoutForm').addEventListener('submit', function(even
                 </div>
 
                 <div class="total">
-                    <p>المجموع الكلي: $${totalAmount.toFixed(2)}</p>
+                    <p>المجموع الكلي: ${totalAmount.toFixed(2)} DH</p>
                 </div>
             </div>
         </body>
