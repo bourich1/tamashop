@@ -45,7 +45,7 @@ fetch(url)
                                 ${stars}
                             </div>
                             <!-- السعر -->
-                            <span class="text-muted text-decoration-line-through">${oldPrice} DH</span>
+                            <span class="text-danger text-muted text-decoration-line-through">${oldPrice} DH</span>
                             <strong> ${productPrice} DH</strong>
                         </div>
                         <!-- زر الإضافة إلى السلة -->

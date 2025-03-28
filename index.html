@@ -72,16 +72,234 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
+    <!-- font awesome -->
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css" />
 
-
     <style>
       .disabled-link {
-          color: gray; /* Optional: Make it look disabled */
-          cursor:no-drop;
-          pointer-events: none;
-          display:none;
+        color: gray; /* Optional: Make it look disabled */
+        cursor: no-drop;
+        pointer-events: none;
+        display: none;
+      }
+      /* زر المشاركة الرئيسي */
+      .share-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 999;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #0d6efd, #030f29);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+        border: none;
+        outline: none;
+      }
+
+      .share-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      /* نافذة المشاركة */
+      .share-modal {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        display: none;
+        z-index: 1001;
+        width: 90%;
+        max-width: 400px;
+        text-align: center;
+        animation: modalFadeIn 0.3s ease;
+      }
+
+      @keyframes modalFadeIn {
+        from {
+          opacity: 0;
+          transform: translate(-50%, -40%);
+        }
+        to {
+          opacity: 1;
+          transform: translate(-50%, -50%);
+        }
+      }
+
+      /* عنوان النافذة */
+      .share-title {
+        font-size: 20px;
+        margin-bottom: 20px;
+        color: #333;
+        font-weight: bold;
+      }
+
+      /* أيقونات المشاركة */
+      .share-icons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 25px;
+        flex-wrap: wrap;
+      }
+
+      .share-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        color: white;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .share-icon:hover {
+        transform: translateY(-5px);
+      }
+
+      .whatsapp-icon {
+        background-color: #25d366;
+      }
+      .facebook-icon {
+        background-color: #3b5998;
+      }
+      .instagram-icon {
+        background: linear-gradient(
+          45deg,
+          #f09433,
+          #e6683c,
+          #dc2743,
+          #cc2366,
+          #bc1888
+        );
+      }
+
+      /* حقل نسخ الرابط */
+      .share-link-container {
+        position: relative;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+      }
+
+      .share-link {
+        flex: 1;
+        padding: 12px 50px 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 14px;
+        direction: ltr;
+        text-align: left;
+        background: #f9f9f9;
+        height: 40px;
+        box-sizing: border-box;
+      }
+
+      .copy-btn {
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #0d6efd;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 6px 12px;
+        cursor: pointer;
+        font-size: 12px;
+        transition: all 0.2s;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .copy-btn:hover {
+        background: #3e8e41;
+        transform: translateY(-50%) scale(1.05);
+      }
+
+      /* زر الإغلاق */
+      .close-btn {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: none;
+        border: none;
+        font-size: 20px;
+        color: #888;
+        cursor: pointer;
+        transition: color 0.2s;
+      }
+
+      .close-btn:hover {
+        color: #333;
+      }
+
+      /* طبقة التعتيم */
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        display: none;
+        backdrop-filter: blur(3px);
+      }
+      .copy-btn i {
+        margin-left: 5px;
+      }
+      /* رسالة التأكيد */
+      .copy-message {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        z-index: 1002;
+        display: none;
+        animation: fadeInOut 2s ease;
+      }
+
+      @keyframes fadeInOut {
+        0% {
+          opacity: 0;
+          top: 10px;
+        }
+        10% {
+          opacity: 1;
+          top: 20px;
+        }
+        90% {
+          opacity: 1;
+          top: 20px;
+        }
+        100% {
+          opacity: 0;
+          top: 10px;
+        }
       }
     </style>
 
@@ -129,7 +347,9 @@
               <a class="nav-link" href="offer.html">Products 79DH</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="contact.html">Contact</a>
+              <a class="nav-link" aria-current="page" href="contact.html"
+                >Contact</a
+              >
             </li>
           </ul>
           <form class="d-flex" id="cartForm">
@@ -150,19 +370,60 @@
     <header class="bg-primary py-5 position-relative">
       <!-- Particles.js Background -->
       <div id="particles-js"></div>
-  
+
       <!-- Content -->
       <div class="container px-4 px-lg-5 my-5 position-relative">
-          <div class="text-center text-white">
-              <h1 class="display-4 fw-bolder">Find the best deals</h1>
-              <p class="lead fw-normal text-white-50 mb-0">
-                  on top-quality products at unbeatable prices! 🚀🛍️
-              </p>
-          </div>
+        <div class="text-center text-white">
+          <h1 class="display-4 fw-bolder">Find the best deals</h1>
+          <p class="lead fw-normal text-white-50 mb-0">
+            on top-quality products at unbeatable prices! 🚀🛍️
+          </p>
+        </div>
       </div>
-  </header>
-  
-  
+    </header>
+
+    <!-- زر المشاركة الرئيسي -->
+    <button class="share-btn" onclick="toggleShareModal()">
+      <i class="fas fa-share-alt"></i>
+    </button>
+    <!-- نافذة المشاركة -->
+    <div class="share-modal" id="shareModal">
+      <button class="close-btn" onclick="toggleShareModal()">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div class="share-title">شارك الموقع مع الأصدقاء</div>
+
+      <div class="share-icons">
+        <div class="share-icon whatsapp-icon" onclick="shareOnWhatsApp()">
+          <i class="fab fa-whatsapp"></i>
+        </div>
+        <div class="share-icon facebook-icon" onclick="shareOnFacebook()">
+          <i class="fab fa-facebook-f"></i>
+        </div>
+        <div class="share-icon instagram-icon" onclick="shareOnInstagram()">
+          <i class="fab fa-instagram"></i>
+        </div>
+      </div>
+
+      <div class="share-link-container">
+        <input
+          type="text"
+          class="share-link"
+          id="shareLink"
+          value="https://www.tamashop.com"
+          readonly
+        />
+        <button class="copy-btn" onclick="copyLink()">
+          <i class="far fa-copy"></i> نسخ
+        </button>
+      </div>
+    </div>
+    <!-- طبقة التعتيم -->
+    <div class="overlay" id="overlay"></div>
+    <!-- رسالة التأكيد -->
+    <div class="copy-message" id="copyMessage">تم نسخ الرابط بنجاح!</div>
+
     <!-- Section-->
     <section class="py-5">
       <div class="container px-4 px-lg-5 mt-5">
@@ -219,7 +480,9 @@
           <!-- Social Media Section -->
           <div class="col-md-4">
             <h5>Follow Us</h5>
-            <a href="https://www.facebook.com/share/1DihqjSw2U/?mibextid=wwXIfr" class="text-dark me-3"
+            <a
+              href="https://www.facebook.com/share/1DihqjSw2U/?mibextid=wwXIfr"
+              class="text-dark me-3"
               ><i class="fab fa-facebook fs-3"></i
             ></a>
             <a href="#" class="text-dark me-3"
@@ -246,7 +509,69 @@
     <script src="js/script.js"></script>
     <!-- particles.js -->
     <script src="js/particles-config.js"></script>
-   
+    <script>
+      // روابط المشاركة
+      const siteUrl = "https://www.tamashop.com";
+      const shareText = "🌟 اكتشف متجر تاما شوب - وجهتك الأولى للتسوق الإلكتروني! 🛍️ تشكيلة واسعة من المنتجات بجودة عالية وأسعار منافسة. 🚀 شحن سريع ودفع آمن. تسوق الآن!";
 
+      // عرض/إخفاء نافذة المشاركة
+      function toggleShareModal() {
+        const modal = document.getElementById("shareModal");
+        const overlay = document.getElementById("overlay");
+
+        if (modal.style.display === "block") {
+          modal.style.display = "none";
+          overlay.style.display = "none";
+        } else {
+          modal.style.display = "block";
+          overlay.style.display = "block";
+        }
+      }
+
+      // مشاركة عبر واتساب
+      function shareOnWhatsApp() {
+        window.open(
+          `https://wa.me/?text=${encodeURIComponent(
+            shareText + " " + siteUrl
+          )}`,
+          "_blank"
+        );
+      }
+
+      // مشاركة عبر فيسبوك
+      function shareOnFacebook() {
+        window.open(
+          `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+            siteUrl
+          )}`,
+          "_blank"
+        );
+      }
+
+      // مشاركة عبر إنستجرام
+      function shareOnInstagram() {
+        // إنستجرام لا يدعم المشاركة المباشرة، لذلك نفتح الرابط في نافذة جديدة
+        window.open(siteUrl, "_blank");
+      }
+
+      // نسخ الرابط
+      function copyLink() {
+        const linkInput = document.getElementById("shareLink");
+        linkInput.select();
+        document.execCommand("copy");
+
+        // عرض رسالة التأكيد
+        const message = document.getElementById("copyMessage");
+        message.style.display = "block";
+        setTimeout(() => {
+          message.style.display = "none";
+        }, 2000);
+      }
+
+      // إغلاق النافذة عند النقر خارجها
+      document
+        .getElementById("overlay")
+        .addEventListener("click", toggleShareModal);
+    </script>
   </body>
 </html>

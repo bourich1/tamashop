@@ -7,27 +7,31 @@ function displayCart() {
     cartItemsContainer.innerHTML = "";
 
     cart.forEach((product, index) => {
-        let productTotal = product.price * product.quantity;
-        totalPrice += productTotal;
+        const price = parseFloat(product.price) || 0; // تحويل السعر إلى رقم
+        const quantity = parseInt(product.quantity) || 0; // تحويل الكمية إلى عدد صحيح
+        const productTotal = price * quantity; // الحساب الصحيح
+
+        totalPrice += productTotal; // تحديث المجموع الكلي
 
         let row = `
             <tr>
                 <td><img src="${product.image}" alt="${product.name}" width="50"> ${product.name}</td>
-                <td>$${product.price}</td>
+                <td>${price.toFixed(2)} DH</td>
                 <td>
                     <button class="btn btn-sm btn-outline-secondary" onclick="changeQuantity(${index}, -1)">-</button>
-                    ${product.quantity}
+                    ${quantity}
                     <button class="btn btn-sm btn-outline-secondary" onclick="changeQuantity(${index}, 1)">+</button>
                 </td>
-                <td>$${productTotal.toFixed(2)}</td>
+                <td>${productTotal.toFixed(2)} DH</td>
                 <td><button class="btn btn-danger btn-sm" onclick="removeFromCart(${index})"><i class="fa-solid fa-xmark fs-5"></i></button></td>
             </tr>
         `;
         cartItemsContainer.innerHTML += row;
     });
 
-    document.getElementById("cart-total").innerText = `$${totalPrice.toFixed(2)}`;
+    document.getElementById("cart-total").innerText = `${totalPrice.toFixed(2)} DH`;
 }
+
 
 // ✅ تغيير الكمية
 function changeQuantity(index, amount) {
@@ -124,25 +128,29 @@ document.getElementById('checkoutForm').addEventListener('submit', function(even
     const email = document.getElementById('email').value;
     const address = document.getElementById('deliveryAddress').value;
 
-    // جمع تفاصيل المنتجات من العربة
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    let cartDetailsHTML = ``;
+    // استرجاع بيانات السلة من localStorage
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let cartDetailsHTML = "";
     let totalAmount = 0;
 
+    // توليد جدول تفاصيل المنتجات
     cart.forEach(product => {
-        const productTotal = product.price * product.quantity;
+        const price = parseFloat(product.price) || 0;
+        const quantity = parseInt(product.quantity) || 0;
+        const productTotal = price * quantity;
+        totalAmount += productTotal;
+
         cartDetailsHTML += `
             <tr>
                 <td><img src="${product.image}" alt="${product.name}" width="50"> ${product.name}</td>
-                <td>${product.quantity}</td>
-                <td>${product.price} DH</td>
+                <td>${quantity}</td>
+                <td>${price.toFixed(2)} DH</td>
                 <td>${productTotal.toFixed(2)} DH</td>
             </tr>
         `;
-        totalAmount += productTotal;
     });
 
-    // إنشاء بريد إلكتروني كامل بصيغة HTML
+    // إنشاء البريد الإلكتروني بصيغة HTML
     const emailBody = `
         <html>
         <head>
@@ -150,7 +158,6 @@ document.getElementById('checkoutForm').addEventListener('submit', function(even
                 body { font-family: Arial, sans-serif; direction: rtl; text-align: right; }
                 .container { padding: 20px; background-color: #f4f4f9; }
                 .header { text-align: center; margin-bottom: 30px; }
-                .header img { width: 120px; margin-bottom: 15px; }
                 .header h1 { font-size: 24px; color: #333; }
                 .order-details table { width: 100%; border-collapse: collapse; margin-top: 20px; }
                 .order-details table th, .order-details table td { 
@@ -199,29 +206,24 @@ document.getElementById('checkoutForm').addEventListener('submit', function(even
         </html>
     `;
 
-    // إرسال البريد الإلكتروني عبر EmailJS
+    // إرسال البريد عبر EmailJS
     emailjs.send('service_xxm68km', 'template_pc135wr', {
         full_name: fullName,
         phone: phone,
         email: email,
         address: address,
-        email_body: emailBody // إرسال البريد بالكامل
+        email_body: emailBody
     }).then(function(response) {
-        // عرض SweetAlert عند النجاح
         Swal.fire({
             icon: 'success',
             title: 'تم إرسال طلبك بنجاح',
             text: 'تمت معالجة طلبك بنجاح.',
             confirmButtonText: 'موافق'
         }).then(() => {
-            // حذف المنتجات من localStorage
             localStorage.removeItem('cart');
-            
-            // إعادة التوجيه إلى الصفحة الرئيسية
-            window.location.href = '../index.html'; // أو ضع رابط الصفحة الرئيسية الخاصة بك
+            window.location.href = '../index.html';
         });
     }, function(error) {
-        // عرض SweetAlert عند الفشل
         Swal.fire({
             icon: 'error',
             title: 'حدث خطأ أثناء إرسال الطلب',
@@ -230,6 +232,7 @@ document.getElementById('checkoutForm').addEventListener('submit', function(even
         });
     });
 });
+
 
 
 
